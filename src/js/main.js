@@ -1,30 +1,50 @@
+$(document).ready(function() {
+    console.log("ready!");
 
-$( document ).ready(function() {
-    console.log( "ready!" );
+    console.log('yes im linked!');
+    $('#login-button').on('click', function(e){
+	e.preventDefault();
+	var userInputName = $('#userName').val();
+	console.log(userInputName);
+enterChat();
+});
 
-console.log('yes im linked!');
+function enterChat(){
 
-  var socket = io();
-  $('form.loginForm').submit(function(){
-    socket.emit('user name', $('#userName').val());
-    $('#userName').val('');
-    return false;
-  });
-    socket.on('user name', function(user_name){
-    console.log(user_name);
-  });
+    var userInputName = $('#userName').val();
+    var currentUser = userInputName;
+    if (currentUser == 'undefined') {
+        currentUser = '';
+    }
+    var socket = io();
 
-  $('form.chatForm').submit(function(){
-    socket.emit('chat message', $('#m').val());
-    $('#m').val('');
-    return false;
-  });
-    socket.on('chat message', function(msg){
-    $('#messages').append($('<li>').text(msg));
-  });
+    socket.emit('send_nick', currentUser);
+
+    socket.on('send_nick', function(login_msg) {
+        $('#messages').append($('<li>').text(login_msg+' just logged in'));
+
+    });
+
+    socket.emit('disconnect', currentUser);
+
+    socket.on('log out', function(logout_msg) {
+        $('#messages').append($('<li>').text(logout_msg+' just logged out!'));
+
+    });
+
+
+    $('form.chatForm').submit(function() {
+        socket.emit('chat message', $('#m').val());
+        $('#m').val('');
+        return false;
+    });
+    socket.on('chat message', function(msg) {
+        $('#messages').append($('<li>').text(msg));
+
+    });
 
 
 
-
+};
 
 });

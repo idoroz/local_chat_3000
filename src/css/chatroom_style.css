@@ -1,7 +1,10 @@
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300);
+
 html {
 	background-color: black;
-	color: white;
+	color: black;
 	text-align: center;
+	font-family: 'Source Sans Pro', sans-serif;
 }
 
 .chatTerminalWrapper {
@@ -10,5 +13,23 @@ html {
 	margin-right: 10%;
 	margin-left: 10%;
 	height: 500px;
-	background-color: lightgrey
+	background-color: lightgrey;
+	color: black;
+}
+
+.chat_logo {
+	  font-family: 'Source Sans Pro', sans-serif;
+  color: white;
+  font-weight: 300;
+	color: green;
+	font-size: 3em;
+}
+
+
+/*#chatroom {
+
+}
+*/
+.hidden {
+	display:none;
 }

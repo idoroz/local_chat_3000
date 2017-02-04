@@ -4,8 +4,8 @@ var app = express();
 var server = app.listen(3000);
 app.use(express.static('src'));
 
-var socket = require('socket.io');
-var io = socket(server);
+var socket_io = require('socket.io');
+var io = socket_io(server);
 
 var currentUser;
 
@@ -17,13 +17,26 @@ io.on('connection', function(client) {
         console.log('user disconnected');
     });
 
-    client.on('user name', function(user_name) {
-    	 io.emit('user name', user_name);
-    	     	var loggedInUser = user_name
+    client.on('send_nick', function(send_nick) {
+    	 io.emit('send_nick', send_nick);
+    	     	var loggedInUser = send_nick
     	     	currentUser = loggedInUser;
+    	     	console.log(currentUser);
+
+    });
+
+        client.on('log in', function(nickname) {
+        	if(nickname == 'undefined') {
+        		currentUser = '';
+        	}
+        	 	var nickname = currentUser;
+    	 io.emit('log in', nickname);
+    	     	console.log("nickname is : " +currentUser);
+
     });
 
     client.on('chat message', function(msg) {
+    	console.log(currentUser);
         var msgObj = {
             "client": currentUser,
             "message": msg
@@ -33,10 +46,11 @@ io.on('connection', function(client) {
 
 });
 
-app.get('/login', function(req, res) {
-    res.sendFile(__dirname + '/src/login.html');
-});
+// app.get('/login', function(req, res) {
+//     res.sendFile(__dirname + '/src/login.html');
+// });
 
-app.get('/chat', function(req, res) {
+app.get('/', function(req, res) {
     res.sendFile(__dirname + '/src/index.html');
+
 });

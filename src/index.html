@@ -2,12 +2,43 @@
 <html>
 <head>
 	<title></title>
+
+  <link rel="stylesheet" type="text/css" href="css/style.css">
   <link rel="stylesheet" type="text/css" href="css/chatroom_style.css">
 </head>
 <body>
-<div><span>|----------------------|<br>~////local_chat/////~<br>|----------------------|</span></div>
+
+
+   <div id="loginWrapper">
+    <div class="container">
+        <h1>Welcome</h1>
+        
+        <form class="loginForm">
+            <input type="text" id="userName" class="userName inputs" placeholder="Username">
+            <button type="submit" id="login-button">Login</button>
+        </form>
+    </div>
+    
+    <ul class="bg-bubbles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+    
+
+  <div id="chatroom" class = "hidden">
+<div class ="chat_logo">~/////local_chat/////~</span></div>
 
 <div class="chatTerminalWrapper">
+
 <ul id="messages"></ul>
 
 </div>
@@ -15,9 +46,10 @@
     <form class="chatForm" action="">
       <input id="m" autocomplete="off" /><button>Send</button>
     </form>
-  
+  </div>
 <script src="/socket.io/socket.io.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+       <script src="js/login.js"></script>
 <script type="text/javascript" src ='js/main.js'></script>
 </body>
 </html>
