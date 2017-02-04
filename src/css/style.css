@@ -77,12 +77,13 @@ body :-ms-input-placeholder {
           transition-timing-function: ease-in-put;
   font-weight: 200;
 }
-form {
+/**//**//**//**//**//**//**//**//**//**//**//**//**/
+form.loginForm {
   padding: 20px 0;
   position: relative;
   z-index: 2;
 }
-form input {
+form.loginForm input {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
@@ -101,15 +102,15 @@ form input {
           transition-duration: 0.25s;
   font-weight: 300;
 }
-form input:hover {
+form.loginForm input:hover {
   background-color: rgba(255, 255, 255, 0.4);
 }
-form input:focus {
+form.loginForm input:focus {
   background-color: white;
   width: 300px;
   color: black;
 }
-form button {
+form.loginForm button {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
@@ -125,9 +126,65 @@ form button {
   -webkit-transition-duration: 0.25s;
           transition-duration: 0.25s;
 }
-form button:hover {
+form.loginForm button:hover {
   background-color: #f5f7f9;
 }
+/**//**//**//**//**//**//**//**//**//**//**//**//**/
+/**//**//**//**//**//**//**//**//**//**//**//**//**/
+form.chatForm {
+  padding: 20px 0;
+  position: relative;
+  z-index: 2;
+}
+form.chatForm input {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  outline: 0;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.2);
+  width: 80%;
+  left: 1em;
+  border-radius: 3px;
+  padding: 10px 15px;
+  margin: 0 auto 10px auto;
+  display: block;
+  text-align: left;
+  font-size: 18px;
+  color: black;
+  -webkit-transition-duration: 0.25s;
+          transition-duration: 0.25s;
+  font-weight: 300;
+}
+form.chatForm input:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+form.chatForm input:focus {
+  background-color: white;
+  width: 80%;
+  color: black;
+}
+form.chatForm button {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  outline: 0;
+ background-color: rgba(255, 255, 255, 0.2);
+  border: 0;
+  padding: 10px 15px;
+  color: #b7deed;
+  border-radius: 3px;
+  width: 250px;
+  cursor: pointer;
+  font-size: 18px;
+  -webkit-transition-duration: 0.25s;
+          transition-duration: 0.25s;
+}
+form.chatForm button:hover {
+ background-color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.4)
+}
+/**//**//**//**//**//**//**//**//**//**//**//**//**/
 .bg-bubbles {
   position: absolute;
   top: 0;
