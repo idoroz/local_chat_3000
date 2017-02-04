@@ -19,6 +19,10 @@ io.on('connection', function(client) {
         console.log('user disconnected');
     });
 
+client.on('userList', function(list) {
+	console.log(list);
+	io.emit('userList', usersLoggedIn);
+})
     client.on('send_nick', function(send_nick) {
     	 io.emit('send_nick', send_nick);
     	     	var loggedInUser = send_nick
@@ -29,10 +33,7 @@ usersLoggedIn.push(client.id);
   console.log(usersLoggedIn);
     });
 
-client.on('userList', function(list) {
-	console.log(list);
-	io.emit('userList', usersLoggedIn);
-})
+
 
     client.on('chat message', function(msg) {
     	console.log(currentUser);
