@@ -9,6 +9,7 @@ var io = socket_io(server);
 
 var currentUser;
 
+var usersLoggedIn = [];
 
 io.on('connection', function(client) {
     var clientName = client.id
@@ -24,9 +25,14 @@ io.on('connection', function(client) {
     	     	currentUser = loggedInUser;
     	     	client.id = currentUser;
     	     	console.log(client.id);
-
+usersLoggedIn.push(client.id);
+  console.log(usersLoggedIn);
     });
 
+client.on('userList', function(list) {
+	console.log(list);
+	io.emit('userList', usersLoggedIn);
+})
 
     client.on('chat message', function(msg) {
     	console.log(currentUser);
@@ -35,6 +41,7 @@ io.on('connection', function(client) {
             "message": msg
         };
         io.emit('chat message', JSON.stringify(msgObj));
+
     });
 
 });
@@ -45,5 +52,6 @@ io.on('connection', function(client) {
 
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/src/index.html');
+    res.send(usersLoggedIn);
 
 });

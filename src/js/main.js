@@ -16,20 +16,28 @@ function enterChat(){
     if (currentUser == 'undefined') {
         currentUser = '';
     }
+    var usersOnline='';
+
     var socket = io();
 
     socket.emit('send_nick', currentUser);
-
     socket.on('send_nick', function(login_msg) {
         $('#messages').append($('<li>').text(login_msg+' just logged in'));
-
     });
-
     socket.on('log out', function(logout_msg) {
         $('#messages').append($('<li>').text(logout_msg+' just logged out!'));
-
     });
 
+    // socket.emit('userList', usersOnline);
+    // socket.on('userList', function(list) {
+    //     for (var i = 0; i<list.length; i++) {
+    //         if(list.indexOf(list[i]) != -1) {
+    //           $('#users').append($('<li>').text(list[i]));
+    //           }
+    //     }
+    //     console.log(list);
+      
+    // });
 
     $('form.chatForm').submit(function() {
         socket.emit('chat message', $('#m').val());
