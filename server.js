@@ -14,6 +14,7 @@ io.on('connection', function(client) {
     var clientName = client.id
     console.log('a user connected: ' + clientName);
     client.on('disconnect', function() {
+    	io.emit('log out', client.id);
         console.log('user disconnected');
     });
 
@@ -21,24 +22,16 @@ io.on('connection', function(client) {
     	 io.emit('send_nick', send_nick);
     	     	var loggedInUser = send_nick
     	     	currentUser = loggedInUser;
-    	     	console.log(currentUser);
+    	     	client.id = currentUser;
+    	     	console.log(client.id);
 
     });
 
-        client.on('log in', function(nickname) {
-        	if(nickname == 'undefined') {
-        		currentUser = '';
-        	}
-        	 	var nickname = currentUser;
-    	 io.emit('log in', nickname);
-    	     	console.log("nickname is : " +currentUser);
-
-    });
 
     client.on('chat message', function(msg) {
     	console.log(currentUser);
         var msgObj = {
-            "client": currentUser,
+            "client": client.id,
             "message": msg
         };
         io.emit('chat message', JSON.stringify(msgObj));

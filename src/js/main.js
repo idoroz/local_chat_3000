@@ -25,8 +25,6 @@ function enterChat(){
 
     });
 
-    socket.emit('disconnect', currentUser);
-
     socket.on('log out', function(logout_msg) {
         $('#messages').append($('<li>').text(logout_msg+' just logged out!'));
 
