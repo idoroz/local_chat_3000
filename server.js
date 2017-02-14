@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 
-var server = app.listen(3000, '10.0.0.6');
+var server = app.listen(3000, '10.0.0.8');
 app.use(express.static('src'));
 
 var socket_io = require('socket.io');
@@ -28,7 +28,8 @@ io.on('connection', function(client) {
    userObj = {
 
             user_name: userName,
-            user_id: userID
+            user_id: userID,
+
 
         }
         usersLoggedIn.push(userObj);
@@ -51,6 +52,20 @@ io.on('connection', function(client) {
 
     });
 
+    // client.on('user typing', function(typing) {
+    //     io.emit('user typing', client.id)
+        
+    // })
+
+client.on('typing', function (data) {
+      console.log(data);
+      io.emit('typing', client.id);
+    });
+
+client.on('stopTyping', function (data) {
+      console.log(data);
+      io.emit('stopTyping', client.id);
+    });
 
         client.on('disconnect', function() {
         io.emit('log out', client.id);
