@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 
-var server = app.listen(3000, '10.0.0.8');
+var server = app.listen(3000, '10.0.0.3');
 app.use(express.static('src'));
 
 var socket_io = require('socket.io');
@@ -22,7 +22,7 @@ io.on('connection', function(client) {
         io.emit('send_nick', send_nick);
         var loggedInUser = send_nick
         var userID = client.id;
-        client.userloggedIn = loggedInUser;
+        // client.userloggedIn = loggedInUser;
         userName = loggedInUser
         console.log(client.id);
    userObj = {

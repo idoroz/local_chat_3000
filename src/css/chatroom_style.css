@@ -1,77 +1,74 @@
 @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300);
-
-html {
-	background-color: black;
-	color: black;
-	text-align: center;
-	font-family: 'Source Sans Pro', sans-serif;
+body {
+    background-color: black;
+    color: white;
+    text-align: center;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 .chatTerminalWrapper {
-	display: flex;
-	width: 80%;
-	margin-right: 10%;
-	margin-left: 10%;
-	height: 500px;
- background-color: rgba(255, 255, 255, 0.2);
-	color: rgba(255, 255, 255, 0.4)
+    display: flex;
+    width: 80%;
+    margin-right: 10%;
+    margin-left: 10%;
+    height: 500px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.4)
 }
 
-ul
-{
-list-style-type: none;
-padding: 0;
-margin: 0;
-text-align: left;
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
 }
 
-li
-{
-
-padding-left: .1em;
+li {
+    padding-left: .1em;
 }
-
-
-
-
 
 .loggedUsers {
-		display: flex;
-	width: 30%;
-	margin-right: 10%;
-	height: 500px;
- background-color: rgba(255, 255, 255, 0.2);
-	color: rgba(255, 255, 255, 0.4);
+    display: flex;
+    width: 30%;
+    margin-right: 10%;
+    height: 500px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.4);
 }
-ul#users {
-	list-style: none;
 
+ul#users {
+    list-style: none;
 }
 
 .isTyping {
-	color: green;
+    color: green;
 }
 
 .terminalWrapper {
-	display: flex;
-	width: 100%;
+    display: flex;
+    width: 100%;
 }
+
 .chat_logo {
-	  font-family: 'Source Sans Pro', sans-serif;
-  color: white;
-  font-weight: 300;
-	color: green;
-	font-size: 3em;
+    font-family: 'Source Sans Pro', sans-serif;
+    color: white;
+    font-weight: 300;
+
+    font-size: 3em;
 }
 
 .green {
-  width: 12px;
-  height: 12px;
-  display: inline-block;
-  margin-left: 0.3em;
-  background-color: #ABFF00;
-  border-radius: 50%;
-  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #304701 0 -1px 9px, #89FF00 0 2px 12px;
+    position: absolute;
+    z-index: -1;
+    width: 34px;
+    height: 34px;
+    display: inline-block;
+    margin-left: -2.7em;
+    margin-top: 0em;
+    background-color: #ABFF00;
+    border-radius: 50%;
+        box-shadow: rgba(0, 0, 0, 0.2) 0 -102px 146px 1px, inset #304701 0 -1px 9px, #89FF00 0 2px 18px;
+    float: left;
 }
 
 
@@ -79,6 +76,58 @@ ul#users {
 
 }
 */
+
 .hidden {
-	display:none;
+    display: none;
+}
+
+.checkWrapper {
+    width: 600px;
+    display: table;
+    margin-right: 300px;
+    margin-top: -5em;
+}
+
+.check {
+    /* display: table-row;*/
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    color: white;
+    text-align: center;
+    margin-left: 33em;
+    background: black;
+    transform: scale(2);
+}
+
+.check span {
+    width: 34px;
+    height: 34px;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    top: -8.25px;
+}
+
+.userAvatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    color: white;
+    text-align: center;
+    float: left;
+    background: rgb(65, 82, 227);
+    margin-right: 0.3em;
+}
+
+.userAvatar span {
+    top: -5.5px;
+}
+
+li.userTab {
+    width: 110%;
+    height: 36px;
+    line-height: 36px;
+    margin: 0.2em;
+    display: block;
 }
