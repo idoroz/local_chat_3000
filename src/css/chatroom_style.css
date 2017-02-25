@@ -8,12 +8,12 @@ body {
 
 .chatTerminalWrapper {
     display: flex;
-    width: 80%;
-    margin-right: 10%;
-    margin-left: 10%;
-    height: 500px;
+    width: 100%;
+    /* margin-right: 10%; */
+    /* margin-left: 10%; */
+    height: 470px;
     background-color: rgba(255, 255, 255, 0.2);
-    color: rgba(255, 255, 255, 0.4)
+    color: rgba(255, 255, 255, 0.4);
 }
 
 ul {
@@ -31,6 +31,7 @@ li {
     display: flex;
     width: 30%;
     margin-right: 10%;
+    margin-top: 40px;
     height: 500px;
     background-color: rgba(255, 255, 255, 0.2);
     color: rgba(255, 255, 255, 0.4);
@@ -118,6 +119,7 @@ ul#users {
     float: left;
     background: rgb(65, 82, 227);
     margin-right: 0.3em;
+    cursor: pointer;
 }
 
 .userAvatar span {
@@ -130,4 +132,42 @@ li.userTab {
     line-height: 36px;
     margin: 0.2em;
     display: block;
+    cursor: pointer;
 }
+
+
+
+        .container.chatrooms{
+            width: 100%;
+
+        }
+
+
+
+        ul.tabs{
+            margin: 0px;
+            padding: 0px;
+            list-style: none;
+        }
+        ul.tabs li{
+            background: none;
+            color: white;
+            display: inline-block;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+
+        ul.tabs li.current{
+            background: #222;
+            color: green;
+        }
+
+        .tab-content{
+            display: none;
+            background: #222;
+            padding: 15px;
+        }
+
+        .tab-content.current{
+            display: inherit;
+        }

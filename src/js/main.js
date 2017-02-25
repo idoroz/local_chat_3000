@@ -1,7 +1,20 @@
-var myClientID;
-
 $(document).ready(function() {
     console.log("ready!");
+   
+
+
+
+
+
+        $('ul.tabs li').click(function() {
+        var tab_id = $(this).attr('data-tab');
+
+        $('ul.tabs li').removeClass('current');
+        $('.tab-content').removeClass('current');
+
+        $(this).addClass('current');
+        $("#" + tab_id).addClass('current');
+    })
 
     var avatars = ["cloud", "tree-deciduous", "tree-conifer", "thumbs-up", "star-empty", "send", "music", "heart", "glass", "copyright-mark", "check", "certificate", "user", "queen", "play", "picture", "globe", "earphone", "cutlery", "wrench", "tent", "screenshot", "off", "knight", "signal", "scissors", "record", "info-sign", "briefcase", "apple", "trash", "sunglasses", "piggy-bank", "paperclip", "ok-circle", "ice-lolly-tasted", "grain", "comment", "bullhorn", "time", "link", "eye-open", "usd", "random", "play-circle", "download", "headphones", "flag", "fire", "volume-up", "leaf", "shopping-cart", "qrcode", "gift", "bookmark", "camera", "bell", "tint", "adjust"];
     console.log(avatars)
@@ -43,7 +56,7 @@ $(document).ready(function() {
 
             var spanClass = 'glyphicon glyphicon-' + avatars[randomAvatarValue()];
 
-            if (spanClass != undefined || null || "") {
+            if (spanClass != "glyphicon glyphicon-undefined") {
                 avatarSpan.className = spanClass;
 
                 avatarElement.appendChild(avatarSpan);
@@ -154,7 +167,7 @@ $(document).ready(function() {
             var lTime = moment().calendar(now);
             var loginTime = lTime.replace('Today', '');
 
-            $('#messages').append($('<li style="color:'+login_msg.u_color+'">').text(login_msg.u_name + ' logged in ' + loginTime));
+            $('#messages').append($('<li style="color:' + login_msg.u_color + '">').text(login_msg.u_name + ' logged in ' + loginTime));
         });
 
 
@@ -164,7 +177,7 @@ $(document).ready(function() {
             console.log(list);
             $("#users").empty();
             $.each(list, function(key, value) {
-                var li_user = '<li class="userTab" id ="' + list[key].user_id + '"><div class="addgreen"></div>' + list[key].user_name.u_name + '<div class="userAvatar" style="background-color:'+ list[key].user_name.u_color + '"><span class="' + list[key].user_name.u_avatar + '"></span></div></li>';
+                var li_user = '<li class="userTab" id ="' + list[key].user_id + '"><div class="addgreen"></div>' + list[key].user_data.u_name + '<div class="userAvatar" style="background-color:' + list[key].user_data.u_color + '"><span class="' + list[key].user_data.u_avatar + '"></span></div></li>';
                 usersOnline.push(value);
 
                 $('#users').append(li_user);
@@ -178,16 +191,59 @@ $(document).ready(function() {
             var userLogOut_color = '';
             for (var i = 0; i < usersOnline.length; i++) {
                 if (usersOnline[i].user_id == user_id) {
-                    userLogOut_name = usersOnline[i].user_name.u_name;
-                    userLogOut_color = usersOnline[i].user_name.u_color;
+                    console.log(usersOnline[i])
+                    userLogOut_name = usersOnline[i].user_data.u_name;
+                    userLogOut_color = usersOnline[i].user_data.u_color;
                 }
             }
             var now = moment();
             var lTime = moment().calendar(now);
             var logoutTime = lTime.replace('Today', '');
-            $('#messages').append($('<li style="color:"'+userLogOut_color+'">').text(userLogOut_name + ' logged out ' + logoutTime));
+            $('#messages').append($('<li style="color:' + userLogOut_color + '">').text(userLogOut_name + ' logged out ' + logoutTime));
 
         });
+
+            $("ul#users").on('click', function(e) {
+        var nodeSelected = event.target.nodeName;
+        var userSelected;
+        var userSelectedName;
+
+        if (nodeSelected == "LI" || "DIV" || "SPAN") {
+
+            if (nodeSelected == "LI") {
+                userSelected = event.target.id;
+
+            }
+            if (nodeSelected == "DIV") {
+                userSelected = event.target.parentElement.id;
+
+            }
+            if (nodeSelected == "SPAN") {
+                userSelected = event.target.parentElement.parentElement.id;
+            }
+
+        }
+        
+
+        socket.emit('userList', usersOnline);
+        socket.on('userList', function(list) {
+            $.each(list, function(key, value) {
+                var li_id = list[key].user_id 
+                var li_name =  list[key].user_data.u_name 
+
+if(li_id == userSelected) {
+  userSelectedName = li_name;
+}
+
+            });
+            $('#pmChat').text(userSelectedName);
+            $('#mainChat').removeClass('current');
+            $('#pmChat').click();
+             // $('#pm').val('pm :'+userSelectedName+';');
+        });
+
+
+    });
 
         $('form.chatForm').submit(function() {
             socket.emit('chat message', $('#m').val());
@@ -200,22 +256,52 @@ $(document).ready(function() {
             var sender_color = '';
             for (var i = 0; i < usersOnline.length; i++) {
                 if (usersOnline[i].user_id == msgObj.client) {
-                    sender_name = usersOnline[i].user_name.u_name;
-                    sender_color = usersOnline[i].user_name.u_color;
+                    sender_name = usersOnline[i].user_data.u_name;
+                    sender_color = usersOnline[i].user_data.u_color;
                 }
             }
-            $('#messages').append($('<li style="color:'+sender_color+'">').text(sender_name + ' : ' + msgObj.message));
+            if (msgObj.message != "") {
 
+
+                $('#messages').append($('<li style="color:' + sender_color + '">').text(sender_name + ' : ' + msgObj.message));
+            }
+        });
+
+
+        $('form.pmForm').submit(function() {
+
+            var pmMsg = $('#pm').val();
+            var pmPrefix = $('#pmChat').text();
+            console.log(pmPrefix)
+            var pmFull = 'pm :'+pmPrefix+';'+pmMsg;
+            socket.emit('pm', pmFull);
+            $('#pm').val('');
+            return false;
+        });
+
+
+
+        socket.on('pm', function(msgObj) {
+             
+
+            console.log(msgObj)
+            var sender_name = '';
+            var sender_color = '';
+            for (var i = 0; i < usersOnline.length; i++) {
+                if (usersOnline[i].user_id == msgObj.sender) {
+                    sender_name = usersOnline[i].user_data.u_name;
+                    sender_color = usersOnline[i].user_data.u_color;
+                }
+            }
+
+           
+            
+               $('#pmChat').text(sender_name);
+               console.log(youUser)
+            $('#private_messages').append($('<li style="color:' + sender_color + '">').text(sender_name + ' : ' + msgObj.message));
 
         });
 
-        // $( "#m" ).keyup(function(e) {
-        // socket.emit('user typing', 'typing');
-        // return false;
-        //    });
-        // socket.on('user typing', function(clientID){
-        //     $('#messages').append($('<li>').text(clientID + ' is typing'));
-        // })
 
         var timeout;
         var userTyping;
@@ -251,18 +337,10 @@ $(document).ready(function() {
         socket.on('stopTyping', function(data) {
             if (data) {
                 $('#' + data + ' div.addgreen').removeClass('green');
-           }
+            }
         });
 
-
-
-
-
     };
-
-
-
-
 
 
 

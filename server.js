@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 
-var server = app.listen(3000, '10.0.0.3');
+var server = app.listen(3000, '10.0.0.7');
 app.use(express.static('src'));
 
 var socket_io = require('socket.io');
@@ -11,7 +11,7 @@ var currentUser;
 var loggedInUser;
 var userID;
 var userName;
-     var userObj;
+var userObj;
 var usersLoggedIn = [];
 
 io.on('connection', function(client) {
@@ -23,11 +23,11 @@ io.on('connection', function(client) {
         var loggedInUser = send_nick
         var userID = client.id;
         // client.userloggedIn = loggedInUser;
-        userName = loggedInUser
+        userData = loggedInUser
         console.log(client.id);
-   userObj = {
+        userObj = {
 
-            user_name: userName,
+            user_data: userData,
             user_id: userID,
 
 
@@ -42,32 +42,32 @@ io.on('connection', function(client) {
 
 
     client.on('chat message', function(msg) {
-    
+
         var msgObj = {
             "client": client.id,
             "message": msg
         };
-            console.log(JSON.stringify(msgObj));
+        console.log(JSON.stringify(msgObj));
         io.emit('chat message', msgObj);
 
     });
 
     // client.on('user typing', function(typing) {
     //     io.emit('user typing', client.id)
-        
+
     // })
 
-client.on('typing', function (data) {
-      console.log(data);
-      io.emit('typing', client.id);
+    client.on('typing', function(data) {
+        console.log(data);
+        io.emit('typing', client.id);
     });
 
-client.on('stopTyping', function (data) {
-      console.log(data);
-      io.emit('stopTyping', client.id);
+    client.on('stopTyping', function(data) {
+        console.log(data);
+        io.emit('stopTyping', client.id);
     });
 
-        client.on('disconnect', function() {
+    client.on('disconnect', function() {
         io.emit('log out', client.id);
         for (var x = 0; x < usersLoggedIn.length; x++) {
 
@@ -75,12 +75,53 @@ client.on('stopTyping', function (data) {
                 usersLoggedIn.splice(x, 1);
                 console.log(usersLoggedIn);
                 io.emit('userList', usersLoggedIn);
-                
+
             }
         }
     });
 
+    client.on('pm', function(msg) {
+
+
+        var n = msg.includes("pm");
+        if (n == true) {
+            console.log('Got it!');
+
+            var str = msg;
+            // var str = 'one:two;three';     
+            var getReciever = str.split(':').pop().split(';').shift(); // returns 'two'
+            console.log(getReciever);
+
+            var getPM = msg.split(";");
+            var result = getPM.pop();
+
+            for (var i = 0; i < usersLoggedIn.length; i++) {
+
+                if (usersLoggedIn[i].user_data.u_name == getReciever) {
+                    console.log('here is the match : ' + usersLoggedIn[i].user_id);
+
+                    var recipient = usersLoggedIn[i].user_id;
+
+                    var pmMsgObj = {
+                        "sender": client.id,
+                        "reciever": recipient,
+                        "message": result
+                    };
+                    client.broadcast.to(usersLoggedIn[i].user_id).emit('pm', pmMsgObj);
+                    client.emit('pm', pmMsgObj);
+
+                }
+            }
+
+        }
+
+    });
+
+
 });
+
+
+
 
 // app.get('/login', function(req, res) {
 //     res.sendFile(__dirname + '/src/login.html');
@@ -88,6 +129,6 @@ client.on('stopTyping', function (data) {
 
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/src/index.html');
-   // res.send(usersLoggedIn);
+    // res.send(usersLoggedIn);
 
 });

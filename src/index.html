@@ -9,40 +9,25 @@
 </head>
 
 <body>
-
-
-
-
- <div id="loginWrapper">
-
-
+    <div id="loginWrapper" style="margin-top: 3em;">
         <div class="container login">
             <h1>Register</h1>
-<div class="heelo"></div>
             <form class="loginForm">
-                   <button id="randColor" class="randomize">randomize</button>
+                <button id="randColor" class="randomize">randomize</button>
                 <div id="color-palette">
                 </div>
                 <div id="avatar-palette">
                 </div>
-
                 <input type="text" id="userName" class="userName inputs" placeholder="Username">
-
                 <button type="submit" id="login-button">Login</button>
-                                 <div class="checkWrapper">
-                 <div class="check">
-                    <span class=""></span>
-                  </div>
-                  </div>
-                  <br />
-
+                <div class="checkWrapper">
+                    <div class="check">
+                        <span class=""></span>
+                    </div>
+                </div>
+                <br />
             </form>
-           
-         
-          
-
         </div>
-
         <!--         <ul class="bg-bubbles">
             <li></li>
             <li></li>
@@ -56,33 +41,55 @@
             <li></li>
         </ul> -->
     </div>
-
-
-
-
-
     <div id="chatroom" class="hidden">
-        <div class="chat_logo">local_chat_3000</span>
-        </div>
-
+        <!--         <div class="chat_logo">local_chat_3000
+        </div> -->
         <div class="terminalWrapper">
-        <div class="chatTerminalWrapper">
-            <ul id="messages"></ul>
-        </div>
-        <div class="loggedUsers">
-            <ul id="users">
-        </ul>
-        </div>
-        </div>
-        <form class="chatForm" action="">
+            <div class="container chatrooms">
+                <ul class="tabs">
+                    <li class="tab-link current" data-tab="tab-1">Main Lobby</li>
+                    <li id="pmChat"class="tab-link" data-tab="tab-2"></li>
+<!--                     <li class="tab-link" data-tab="tab-3">Tab Three</li>
+                    <li class="tab-link" data-tab="tab-4">Tab Four</li> -->
+                </ul>
+                <div id="tab-1" class="tab-content current">
+                    <div class="chatTerminalWrapper">
+                        <ul id="messages"></ul>
+                    </div>
+                            <form class="chatForm" action="">
             <input id="m" autocomplete="off" />
             <button>Send</button>
         </form>
+                </div>
+                <div id="tab-2" class="tab-content">
+                    <div class="chatTerminalWrapper">
+                        <ul id="private_messages"></ul>
+                    </div>
+                    <form class="pmForm" action="">
+                        <input id="pm" autocomplete="off" />
+                        <button>Send</button>
+                    </form>
+                </div>
+   <!--              <div id="tab-3" class="tab-content">
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                </div>
+                <div id="tab-4" class="tab-content">
+                    Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </div> -->
+            </div>
+            <!-- container -->
+            <div class="loggedUsers">
+                <ul id="users">
+                </ul>
+            </div>
+        </div>
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     <script src="js/moment.js"></script>
     <script src='js/main.js'></script>
+    <script src='js/underscore-min.js'></script>
+    <script src='js/backbone-min.js'></script>
 </body>
 
 </html>
