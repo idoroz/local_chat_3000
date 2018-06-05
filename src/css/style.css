@@ -48,10 +48,6 @@ body :-ms-input-placeholder {
 }
 .wrapper {
   background: black;
-/*  background: -webkit-gradient(left top, right bottom, color-stop(0%, #b7deed), color-stop(10%, #71ceef), color-stop(98%, #21b4e2), color-stop(100%, #b7deed));
-  background: -webkit-linear-gradient(-45deg, #b7deed 0%, #71ceef 10%, #21b4e2 98%, #b7deed 100%);
-  background: -webkit-linear-gradient(315deg, #b7deed 0%, #71ceef 10%, #21b4e2 98%, #b7deed 100%);
-  background: linear-gradient(135deg, #b7deed 0%, #71ceef 10%, #21b4e2 98%, #b7deed 100%);*/
     position: absolute;
     left: 0;
     width: 100%;
@@ -65,7 +61,7 @@ body :-ms-input-placeholder {
 .container {
   max-width: 600px;
   margin: 0 auto;
-/*  padding: 80px 0;*/
+
   height: 400px;
   text-align: center;
 }
@@ -237,6 +233,61 @@ form.pmForm button {
           transition-duration: 0.25s;
 }
 form.pmForm button:hover {
+ background-color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.4)
+}
+/**//**//**//**//**//**//**//**//**//**//**//**//**/
+/**//**//**//**//**//**//**//**//**//**//**//**//**/
+form.pmForm2 {
+  padding: 20px 0;
+  position: relative;
+  z-index: 2;
+}
+form.pmForm2 input {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  outline: 0;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.2);
+  width: 80%;
+  left: 1em;
+  border-radius: 3px;
+  padding: 10px 15px;
+  margin: 0 auto 10px auto;
+  display: block;
+  text-align: left;
+  font-size: 18px;
+  color: black;
+  -webkit-transition-duration: 0.25s;
+          transition-duration: 0.25s;
+  font-weight: 300;
+}
+form.pmForm2 input:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+form.pmForm2 input:focus {
+  background-color: white;
+  width: 80%;
+  color: black;
+}
+form.pmForm2 button {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  outline: 0;
+ background-color: rgba(255, 255, 255, 0.2);
+  border: 0;
+  padding: 10px 15px;
+  color: #b7deed;
+  border-radius: 3px;
+  width: 250px;
+  cursor: pointer;
+  font-size: 18px;
+  -webkit-transition-duration: 0.25s;
+          transition-duration: 0.25s;
+}
+form.pmForm2 button:hover {
  background-color: rgba(255, 255, 255, 0.4);
   color: rgba(255, 255, 255, 0.4)
 }

@@ -5,7 +5,6 @@ $( document ).ready(function() {
 $('#login-button').on('click', function(e){
 	e.preventDefault();
 	var userInputName = $('#userName').val();
-	//console.log(userInputName);
 loginSuccess();
 })
 

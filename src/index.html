@@ -28,30 +28,17 @@
                 <br />
             </form>
         </div>
-        <!--         <ul class="bg-bubbles">
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ul> -->
     </div>
     <div id="chatroom" class="hidden">
-        <!--         <div class="chat_logo">local_chat_3000
-        </div> -->
+
         <div class="terminalWrapper">
             <div class="container chatrooms">
                 <ul class="tabs">
-                    <li class="tab-link current" data-tab="tab-1">Main Lobby</li>
-                    <li id="pmChat"class="tab-link" data-tab="tab-2"></li>
-<!--                     <li class="tab-link" data-tab="tab-3">Tab Three</li>
-                    <li class="tab-link" data-tab="tab-4">Tab Four</li> -->
+                    <li id="mainChat" class="tab-link current" data-tab="tab-1">Main Lobby</li>
+                    <li id="pmChat_one" class="tab-link" data-tab="tab-2"></li>
+                    <li id="pmChat_two"class="tab-link" data-tab="tab-3"></li>
                 </ul>
+
                 <div id="tab-1" class="tab-content current">
                     <div class="chatTerminalWrapper">
                         <ul id="messages"></ul>
@@ -61,6 +48,7 @@
             <button>Send</button>
         </form>
                 </div>
+
                 <div id="tab-2" class="tab-content">
                     <div class="chatTerminalWrapper">
                         <ul id="private_messages"></ul>
@@ -70,12 +58,17 @@
                         <button>Send</button>
                     </form>
                 </div>
-   <!--              <div id="tab-3" class="tab-content">
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+                           <div id="tab-3" class="tab-content">
+                    <div class="chatTerminalWrapper">
+                        <ul id="private_messages_two"></ul>
+                    </div>
+                    <form class="pmForm2" action="">
+                        <input id="pm2" autocomplete="off" />
+                        <button>Send</button>
+                    </form>
                 </div>
-                <div id="tab-4" class="tab-content">
-                    Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                </div> -->
+
             </div>
             <!-- container -->
             <div class="loggedUsers">
@@ -88,8 +81,6 @@
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     <script src="js/moment.js"></script>
     <script src='js/main.js'></script>
-    <script src='js/underscore-min.js'></script>
-    <script src='js/backbone-min.js'></script>
 </body>
 
 </html>

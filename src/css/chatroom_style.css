@@ -9,8 +9,6 @@ body {
 .chatTerminalWrapper {
     display: flex;
     width: 100%;
-    /* margin-right: 10%; */
-    /* margin-left: 10%; */
     height: 470px;
     background-color: rgba(255, 255, 255, 0.2);
     color: rgba(255, 255, 255, 0.4);
@@ -73,11 +71,6 @@ ul#users {
 }
 
 
-/*#chatroom {
-
-}
-*/
-
 .hidden {
     display: none;
 }
@@ -90,7 +83,6 @@ ul#users {
 }
 
 .check {
-    /* display: table-row;*/
     width: 34px;
     height: 34px;
     border-radius: 50%;
@@ -171,3 +163,4 @@ li.userTab {
         .tab-content.current{
             display: inherit;
         }
+

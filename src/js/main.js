@@ -1,6 +1,12 @@
+var pmChatNew =[];
+
 $(document).ready(function() {
     console.log("ready!");
-   
+    document.title = "";
+     var tabslinks = $( "ul.tabs" );
+            console.log(tabslinks)
+
+var CurrentUser;
 
 
 
@@ -103,8 +109,6 @@ $(document).ready(function() {
 
     })
 
-    // getColors();
-    // getAvatars();
 
     $('#randColor').on('click', function() {
         $('#color-palette').empty();
@@ -125,7 +129,6 @@ $(document).ready(function() {
 
         if (code === 13) {
             e.preventDefault();
-            // console.log('presed');
             $('#login-button').click()
             return false;
         }
@@ -143,6 +146,7 @@ $(document).ready(function() {
     function enterChat() {
 
         var userInputName = $('#userName').val();
+         document.title = userInputName;
         var userInputColor = $('.check').css('background-color');
         var userInputAvatar = $('.check span').attr('class');
         var currentUser = userInputName;
@@ -168,6 +172,7 @@ $(document).ready(function() {
             var loginTime = lTime.replace('Today', '');
 
             $('#messages').append($('<li style="color:' + login_msg.u_color + '">').text(login_msg.u_name + ' logged in ' + loginTime));
+        CurrentUser = userInputName;
         });
 
 
@@ -236,10 +241,22 @@ if(li_id == userSelected) {
 }
 
             });
-            $('#pmChat').text(userSelectedName);
+            var tabslinks = $( "ul.tabs" );
+            console.log(tabslinks)
+             console.log(tabslinks[0].children[1].innerHTML);
+            var newChat = tabslinks[0].children[1].innerHTML;
+
+            if (newChat == "") {
+
+                      $('#pmChat_one').text(userSelectedName);
             $('#mainChat').removeClass('current');
-            $('#pmChat').click();
-             // $('#pm').val('pm :'+userSelectedName+';');
+            $('#pmChat_one').click();
+       
+            }else{
+                console.log(newChat);
+               $('#pmChat_two').text(userSelectedName);
+               $('#pmChat_one').removeClass('current');
+             }
         });
 
 
@@ -271,11 +288,22 @@ if(li_id == userSelected) {
         $('form.pmForm').submit(function() {
 
             var pmMsg = $('#pm').val();
-            var pmPrefix = $('#pmChat').text();
+            var pmPrefix = $('#pmChat_one').text();
             console.log(pmPrefix)
             var pmFull = 'pm :'+pmPrefix+';'+pmMsg;
             socket.emit('pm', pmFull);
             $('#pm').val('');
+            return false;
+        });
+
+                $('form.pmForm2').submit(function() {
+
+            var pmMsg = $('#pm2').val();
+            var pmPrefix = $('#pmChat_two').text();
+            console.log(pmPrefix)
+            var pmFull = 'pm :'+pmPrefix+';'+pmMsg;
+            socket.emit('pm', pmFull);
+            $('#pm2').val('');
             return false;
         });
 
@@ -295,8 +323,26 @@ if(li_id == userSelected) {
             }
 
            
+            console.log('pm chat CurrentUser : ' +CurrentUser);
+            console.log(sender_name == CurrentUser);
+                   var tabslinks = $( "ul.tabs" );
+            console.log('recieving end ' + tabslinks)
+             console.log(tabslinks[0].children[1].innerHTML);
+               var firstPM = $('#pmChat_one');
+               console.log("firstPM " + firstPM.text);
+               if(firstPM == "") {
+
+                $('#pmChat_one').text(sender_name);
+               }
+               else{
+
+                $('#pmChat_two').text(sender_name);
+               }
+                
             
-               $('#pmChat').text(sender_name);
+
+
+               
                console.log(youUser)
             $('#private_messages').append($('<li style="color:' + sender_color + '">').text(sender_name + ' : ' + msgObj.message));
 
@@ -345,14 +391,12 @@ if(li_id == userSelected) {
 
 
     function loginSuccess() {
-        //    var socket = io();
         $('form.loginForm').fadeOut(700, loadIt);
         $('.wrapper').addClass('form-success');
     }
 
     function loadIt() {
         setTimeout(function() {
-            // window.location.pathname = '/chat';
             $('#loginWrapper').addClass('hidden');
             $("#chatroom").removeClass('hidden');
         }, 1000);
@@ -362,3 +406,16 @@ if(li_id == userSelected) {
 
 
 });
+
+
+
+Array.prototype.allValuesSame = function() {
+
+    for(var i = 1; i < this.length; i++)
+    {
+        if(this[i] !== this[0])
+            return false;
+    }
+
+    return true;
+}
